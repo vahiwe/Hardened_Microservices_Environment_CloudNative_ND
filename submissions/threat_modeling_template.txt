@@ -1,0 +1,21 @@
+Docker Threat Modeling
+Given Docker's system components and the STRIDE framework, identify five potential threats that may arise.
+- A fork bomb (multiple forks of a single image) could be used to create a denial of service attack.
+- A vulnerability in a container could be exploited to gain unauthorized access to the host system.
+- Container image permissions may be elevated using the --privilege flag. Image libraries may contain security flaws. This can affect image security. This can be used to elevate privileges on the host system.
+- Sensitive data such as secrets may be left in the container image and exposed at runtime affecting image security and potentially much more, depending on the scope of the credentials. This would affect image security. This can be used for an information disclosure attack.
+- Host devices exposed to containers (such as USB devices) could be used to create a denial of service attack. 
+
+Kubernetes Threat Modeling
+Given Kubernetes' system components and the STRIDE framework, identify five potential threats that may arise.
+- A vulnerability in Kubelet could be exploited to gain unauthorized access to the host system.
+- A vulnerability in the Kube-ApiServer could be exploited for a spoofing attack.
+- A vulnerability in the etcd could be exploited for an information disclosure attack.
+- A vulnerability in the Kube-Scheduler could be exploited for a denial of service attack.
+- A vulnerability in the Kube-Proxy could be exploited for an information disclosure attack.
+
+Docker-bench Run Results and Analysis
+From the failed findings, select and document 3 findings from the Docker-bench results that you want to harden based on the 5 attack surface areas you identified in Step 1. At least 1 of the 3 hardened findings should be different from the ones mentioned in the exercise (i.e. 5.10, 5.14, and 5.22).
+- 4.5 Ensure Content trust for Docker is Enabled. Content trust provides the ability to use digital signatures for data sent to and received from remote Docker registries. These signatures allow client-side verification of the identity and the publisher of specific image tags and ensures the provenance of container images.
+- 2.2.b Ensure the logging level is set to 'info'. Setting up an appropriate log level, configures the Docker daemon to log events that you would want to review later. A base log level of info and above would capture all logs except debug logs. Until and unless required, you should not run Docker daemon at debug log level.
+- 2.1 Ensure network traffic is restricted between containers on the default bridge. By default, unrestricted network traffic is enabled between all containers on the same host on the default network bridge. Thus, each container has the potential of reading all packets across the container network on the same host. This might lead to an unintended and unwanted disclosure of information to other containers. Hence, restrict inter-container communication on the default network bridge.

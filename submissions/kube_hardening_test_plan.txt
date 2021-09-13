@@ -1,0 +1,7 @@
+To harden a Kubernetes cluster changes should not be applied to the production environment directly.
+There should be a test environment that is used for testing changes before applying them to the production environment.
+When these changes have been applied to the test environment, they should be tested extensively to ensure they do not break the environment.
+Once the changes have been tested, they should not be rolled out immediately to the production environment.
+Instead a Canary deployment should be created and deployed to the production environment.
+This can be done by creating a new deployment with the new changes and then rolling out the canary deployment.
+Once the canary deployment is rolled out, the canary deployment should be promoted to the production environment if no issues are found.

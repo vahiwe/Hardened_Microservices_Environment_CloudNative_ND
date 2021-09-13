@@ -1,0 +1,16 @@
+1. Incident commander name: Ahiwe Onyebuchi Valentine
+2. Executive Summary of what happened: 
+    - Three pods running three different crypto miners were launched.
+    - The pods are moneropool and minergate.
+    - The images for the pods are servethehome/monero_cpu_moneropool:latest, servethehome/monero_cpu_minergate:latest and servethehome/universal_cryptonight:latest.
+3. Summary of what was affected: 
+    - The Cluster ran out of resources.
+    - The Node was affected by the incident.
+4. Summmry of the impact:
+    - CPU spikes on the cluster significantly as the crypto pods are consuming resources, as shown on the Kubernetes/Compute Resources panel.
+    - Cluster is not able to serve the traffic due to the crypto pods consuming resources.
+5. Summary of the remediation steps:
+    - The administrator noticed the event through Grafana monitoring and terminated the pods.
+    - Access to the cluster should be restricted to the administrator. This prevents the cluster from being used by bad actors.
+6. Summary of lessons learned:
+    - We should review access to the Kubernetes API server from administrative terminals and the Grafana dashboards. Admission controllers can also be configured to disallow unknown images to be used to create containers.
